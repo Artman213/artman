@@ -14,14 +14,14 @@ import android.widget.LinearLayout;
 
 import com.crashlytics.android.Crashlytics;
 import com.example.artman2111.thenewmdb.R;
-import com.example.artman2111.thenewmdb.activity.present.Presenter;
+import com.example.artman2111.thenewmdb.activity.adapter.Adapter_movie;
 import com.example.artman2111.thenewmdb.activity.tmdb.FilmModalAccept;
 
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private RecyclerView recyclerView;
-    private Presenter adapter;
+    private Adapter_movie adapter;
     static boolean sortbypop = true;
     private Context context = this;
     private FilmModalAccept filmModalAccept;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView = (RecyclerView) findViewById(R.id.mainActivityForMovie);
         GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new Presenter(context, array);
+        adapter = new Adapter_movie(context, array);
         recyclerView.setAdapter(adapter);
 
 
@@ -48,13 +48,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-        array1=Presenter.newArray;
+        array1= Adapter_movie.newArray;
         recyclerView.scrollToPosition(position);
         if (array1==null) {
             startThread();
         }
         if (array1!=null){
-            adapter = new Presenter(context, array1);
+            adapter = new Adapter_movie(context, array1);
             recyclerView.setAdapter(adapter);
         }
         reloadAdapter();
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         array = arraylist;
                         Log.d("artman", "OnUi array ---- >>>>>" + array.length);
                         Context context = MainActivity.this;
-                        adapter = new Presenter(context, array);
+                        adapter = new Adapter_movie(context, array);
                         recyclerView.setAdapter(adapter);
 
                     }

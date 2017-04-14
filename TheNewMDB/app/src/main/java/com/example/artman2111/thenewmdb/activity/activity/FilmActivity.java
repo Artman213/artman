@@ -94,5 +94,6 @@ public class FilmActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        MainActivity.position = position;
     }
 }

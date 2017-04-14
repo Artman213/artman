@@ -1,9 +1,7 @@
-package com.example.artman2111.thenewmdb.activity.present;
+package com.example.artman2111.thenewmdb.activity.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,13 +20,12 @@ import com.example.artman2111.thenewmdb.activity.activity.FilmActivity;
 import com.example.artman2111.thenewmdb.activity.activity.MainActivity;
 import com.example.artman2111.thenewmdb.activity.tmdb.FilmModalAccept;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 /**
  * Created by artman2111 on 13.03.17.
  */
 
-public class Presenter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
     private int count;
     private String[][] array;
@@ -43,7 +40,7 @@ public class Presenter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
 
-    public Presenter(Context context , String[][] paths ) {
+    public Adapter_movie(Context context , String[][] paths ) {
         inflater = LayoutInflater.from(context);
         array = paths;
         if (array != null) {
@@ -65,12 +62,12 @@ public class Presenter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public class ItemView extends RecyclerView.ViewHolder{
         View rootView;
         TextView textViewNameFilm;
-        LinearLayout imageViewImageFilm;
+        ImageView imageViewImageFilm;
         ImageButton imageButtonFavorite;
         public ItemView(View itemView) {
             super(itemView);
             rootView = itemView;
-            imageViewImageFilm = (LinearLayout) itemView.findViewById(R.id.itemPopularImage);
+            imageViewImageFilm = (ImageView) itemView.findViewById(R.id.itemPopularImage);
             imageButtonFavorite = (ImageButton) itemView.findViewById(R.id.favoriteButton);
         }
     }
@@ -79,7 +76,6 @@ public class Presenter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         ItemView itemView = (ItemView) holder;
         final int position1 = holder.getAdapterPosition();
-        MainActivity.position = position;
         item(holder, position1);
         Handler handler = new Handler();
         ((ItemView) holder).imageButtonFavorite.setOnClickListener(new View.OnClickListener() {
@@ -133,23 +129,7 @@ public class Presenter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             d = (context.getResources().getDrawable(R.drawable.images));
             String result = "https://image.tmdb.org/t/p/w500";
             String poster = array[position][1];
-            Picasso.with(context).load(result + poster).placeholder(d).into(new Target() {
-                @Override
-                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                    ((ItemView) holder).imageViewImageFilm.setBackground(new BitmapDrawable(context.getResources(), bitmap));
-                }
-
-                @Override
-                public void onBitmapFailed(Drawable errorDrawable) {
-
-                }
-
-                @Override
-                public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-                }
-
-            });
+            Picasso.with(context).load(result+poster).placeholder(d).into(((ItemView) holder).imageViewImageFilm);
         }
     }
     public String[][] getArray(){
