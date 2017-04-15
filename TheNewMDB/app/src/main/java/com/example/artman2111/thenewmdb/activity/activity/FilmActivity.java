@@ -9,6 +9,8 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -21,16 +23,17 @@ import com.squareup.picasso.Target;
  */
 
 
-public class FilmActivity extends AppCompatActivity {
-    public static final String KEY_USER_ID = "KEY_USER_ID";
+public class FilmActivity extends AppCompatActivity implements View.OnClickListener {
     private int position;
     private String poster;
     private ScrollView scrollView;
     private TextView titel , about, data;
+    private ImageButton imageButton;
     private String id;
     private String title;
     private String overview;
     private String release;
+    Intent intent;
     public FilmActivity(){
     }
 
@@ -42,8 +45,8 @@ public class FilmActivity extends AppCompatActivity {
         titel = (TextView) findViewById(R.id.titel);
         about = (TextView) findViewById(R.id.overvive);
         data = (TextView) findViewById(R.id.date);
-
-        Intent intent;
+        imageButton = (ImageButton) findViewById(R.id.imageButtonLayout);
+        imageButton.setOnClickListener(this);
         intent = getIntent();
         if (intent!=null){
             Bundle bundle = intent.getExtras();
@@ -56,6 +59,8 @@ public class FilmActivity extends AppCompatActivity {
                 release = bundle.getString("release");
             }
         }
+        setTitle(title);
+        setBackgraund();
         Log.d("artman","looock id ---->>>>>    "+id);
         titel.setText(title);
         about.setText(overview);
@@ -91,9 +96,22 @@ public class FilmActivity extends AppCompatActivity {
         },2000);
     }
 
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         MainActivity.position = position;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.imageButtonLayout:
+                Intent intent = new Intent(FilmActivity.this,FilmPosterActivity.class);
+                intent.putExtra("id",id);
+                FilmActivity.this.startActivity(intent);
+                break;
+        }
+
     }
 }

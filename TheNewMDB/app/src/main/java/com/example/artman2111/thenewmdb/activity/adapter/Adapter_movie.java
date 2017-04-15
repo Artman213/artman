@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.artman2111.thenewmdb.R;
@@ -61,7 +60,6 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public class ItemView extends RecyclerView.ViewHolder{
         View rootView;
-        TextView textViewNameFilm;
         ImageView imageViewImageFilm;
         ImageButton imageButtonFavorite;
         public ItemView(View itemView) {
@@ -74,7 +72,6 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        ItemView itemView = (ItemView) holder;
         final int position1 = holder.getAdapterPosition();
         item(holder, position1);
         Handler handler = new Handler();
@@ -132,12 +129,6 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             Picasso.with(context).load(result+poster).placeholder(d).into(((ItemView) holder).imageViewImageFilm);
         }
     }
-    public String[][] getArray(){
-        if (array1!=null) {
-            Log.d("artman", "getArray ------ >>>>>>       " + array.length);
-        }
-        return newArray;
-    }
 
     public void upDate(){
         FilmModalAccept.page++;
@@ -152,7 +143,7 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 newArray[i][3] = array[i][3];
                 newArray[i][4] = array[i][4];
             }
-            Log.d("artman", "array1 ------ >>>>>>       " + array1[1][2]);
+            Log.d("artman", "array1 ------ >>>>>>       " + array1[1][1]);
             for (int i = 0; i < 20; i++) {
                 newArray[(count - 20) + i][0] = array1[i][0];
                 newArray[(count - 20) + i][1] = array1[i][1];

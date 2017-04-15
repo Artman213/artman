@@ -13,14 +13,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.activity.MainActivity">
+        <activity android:name=".activity.activity.MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.activity.FilmActivity"/>
+        <activity android:name=".activity.activity.FilmActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.activity.FilmPosterActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.activity.FavoriteActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.activity.SearchActivity" android:screenOrientation="portrait"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="f5e4819e826d867d000cec227b514081de01ab12" />

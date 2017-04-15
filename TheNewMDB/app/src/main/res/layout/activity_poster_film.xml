@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <android.support.v7.widget.RecyclerView
+    android:layout_height="match_parent"
+    android:id="@+id/layoutFilmPosterActivity">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageRecyclerView">
-
-    </android.support.v7.widget.RecyclerView>
+        android:orientation="horizontal"
+        android:background="#ee64b927"
+        android:padding="10dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/backdrops"
+        android:layout_weight="1"
+        android:textColor="#fafafa"
+        android:text="@string/backdrops"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/posters"
+            android:textColor="#fafafa"
+            android:gravity="center"
+            android:text="@string/posters"/>
+        </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragmentGallery"
+        />
 
 </LinearLayout>

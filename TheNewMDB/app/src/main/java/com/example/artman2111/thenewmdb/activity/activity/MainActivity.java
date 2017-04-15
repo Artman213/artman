@@ -40,9 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new Adapter_movie(context, array);
+        setTitle("Popular Film");
         recyclerView.setAdapter(adapter);
-
-
     }
 
     @Override
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             private String[][] arraylist;
             @Override
             public void run() {
-                filmModalAccept = new FilmModalAccept();
+                filmModalAccept = new FilmModalAccept(MainActivity.this);
                 arraylist = filmModalAccept.getPathsFromAPI(sortbypop);
                 runOnUiThread(new Runnable() {
                     @Override
@@ -105,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void run() {
-                filmModalAccept = new FilmModalAccept();
+                filmModalAccept = new FilmModalAccept(MainActivity.this);
                 arraylist = filmModalAccept.getPathsFromAPI(sortbypop);
                 runOnUiThread(new Runnable() {
                     @Override
