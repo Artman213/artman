@@ -1,13 +1,13 @@
 package com.example.artman2111.thenewmdb.activity.tmdb;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.artman2111.thenewmdb.activity.models.Base_Gallery;
 import com.example.artman2111.thenewmdb.activity.models.Gallery_Acept;
 import com.example.artman2111.thenewmdb.activity.models.MySingleton;
 
@@ -27,16 +27,16 @@ import java.util.List;
 public class FilmModalAccept extends BaseModal {
     public static int page = 1;
     Context context;
-    private List<Base_Gallery> dbGallery;
+    private List<Gallery_Acept> dbGallery;
     static final String API_KEY = "94edada748dbcb0dbb6dded2fe0d5c82";
 
     public FilmModalAccept(Context context){
-        this.context = context;
         dbGallery = new ArrayList<>();
+        this.context = context;
+
     }
 
     public String[][] getPathsFromAPI(boolean sortbypop){
-        while (true){
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
             String JSONResult;
@@ -74,8 +74,8 @@ public class FilmModalAccept extends BaseModal {
                     return null;
                 }
                 JSONResult = buffer.toString();
-
                 try {
+                    page++;
                     return getPathsFromJSON(JSONResult);
 
                 }catch (JSONException e){
@@ -83,7 +83,6 @@ public class FilmModalAccept extends BaseModal {
                 }
             }catch (Exception e){
                 Log.d("artman","Exception" + e );
-                continue;
             }finally {
                 if (urlConnection!=null){
                     urlConnection.disconnect();
@@ -96,7 +95,7 @@ public class FilmModalAccept extends BaseModal {
                     }
                 }
             }
-        }
+        return null;
     }
     public String[][] getPathsFromJSON(String JSONStringParam) throws JSONException{
         JSONObject jsonString = new JSONObject(JSONStringParam);
@@ -118,39 +117,46 @@ public class FilmModalAccept extends BaseModal {
         return result;
 
     }
-    public List<Base_Gallery> getGalleryFromAPI(boolean sortbypop) {
-        String urlString = "https://api.themoviedb.org/3/movie/popular?api_key=" + API_KEY + "&language=ru&page="+page;
+public List<Gallery_Acept> getGalleryFromAPI(String movieID, final String jsonArray) {
+    String urlString = "https://api.themoviedb.org/3/movie/"+movieID+"/images?api_key="+API_KEY;
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, urlString,null,
+    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, urlString,
 
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray array = response.getJSONArray("results");
+            new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        JSONArray array = response.getJSONArray(jsonArray);
 
-                            for (int i = 0; i < 20; i++) {
-                                JSONObject object = array.getJSONObject(i);
-                                String poster = object.getString("poster_path");
-                                String id = object.getString("id");
-                                Gallery_Acept data = new Gallery_Acept(object.getString("poster_path"));
-                                dbGallery.add(data);
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject object = array.getJSONObject(i);
+                            Gallery_Acept data = new Gallery_Acept(object.getString("file_path"));
+                            dbGallery.add(data);
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                        Log.d("artman","hello 1  " + dbGallery.size());
 
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 }
-        );
-        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
-        return dbGallery;
-    }
+                }
+            }
+    );
+    Handler handler = new Handler();
+    handler.postDelayed(new Runnable() {
+        @Override
+        public void run() {
+            Log.d("artman","requestQueue2  " + dbGallery.size());
+        }
+    },1000);
+
+    MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+
+    return dbGallery;
+}
 }

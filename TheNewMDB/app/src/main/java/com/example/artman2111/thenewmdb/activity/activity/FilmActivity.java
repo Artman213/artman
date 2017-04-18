@@ -33,7 +33,7 @@ public class FilmActivity extends AppCompatActivity implements View.OnClickListe
     private String title;
     private String overview;
     private String release;
-    Intent intent;
+    private Intent intent;
     public FilmActivity(){
     }
 

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,11 +22,12 @@ public class FilmPosterActivity extends AppCompatActivity implements View.OnClic
     private LinearLayout linearLayout;
     private Backdrops_Fragment backdrops_fragment;
     private Poster_Fragment poster_fragment;
-    private String id;
+    public static String id;
     Intent intent;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setElevation(0);
         setContentView(R.layout.activity_poster_film);
         linearLayout = (LinearLayout) findViewById(R.id.layoutFilmPosterActivity);
         findViewById(R.id.backdrops).setOnClickListener(this);
@@ -40,7 +40,6 @@ public class FilmPosterActivity extends AppCompatActivity implements View.OnClic
                 id = bundle.getString("id");
             }
         }
-        Log.d("artman","look id in FilmPosterActivity ---->>>>  "  + id);
         setTitle("Gallery");
 
         poster_fragment = new Poster_Fragment();

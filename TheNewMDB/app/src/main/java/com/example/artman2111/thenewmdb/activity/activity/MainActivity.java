@@ -5,10 +5,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new Adapter_movie(context, array);
+        ActionBar actionBar = getSupportActionBar();
         setTitle("Popular Film");
         recyclerView.setAdapter(adapter);
     }
@@ -110,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void run() {
                         array = arraylist;
-                        Log.d("artman", "OnUi array ---- >>>>>" + array.length);
                         Context context = MainActivity.this;
                         adapter = new Adapter_movie(context, array);
                         recyclerView.setAdapter(adapter);

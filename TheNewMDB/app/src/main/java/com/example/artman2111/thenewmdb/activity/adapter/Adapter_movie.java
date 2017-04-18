@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 import com.example.artman2111.thenewmdb.R;
 import com.example.artman2111.thenewmdb.activity.activity.FilmActivity;
 import com.example.artman2111.thenewmdb.activity.activity.MainActivity;
-import com.example.artman2111.thenewmdb.activity.tmdb.FilmModalAccept;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -91,13 +89,8 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 onClickListener(position1);
             }
         });
-        if (position1 == count-1) {
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    upDate();
-                }
-            },500);
+        if (position1-1 == count - 2) {
+            upDate();
         }
 
     }
@@ -126,12 +119,11 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             d = (context.getResources().getDrawable(R.drawable.images));
             String result = "https://image.tmdb.org/t/p/w500";
             String poster = array[position][1];
-            Picasso.with(context).load(result+poster).placeholder(d).into(((ItemView) holder).imageViewImageFilm);
+            Picasso.with(context).load(result+poster).resize(513,769).placeholder(d).into(((ItemView) holder).imageViewImageFilm);
         }
     }
 
     public void upDate(){
-        FilmModalAccept.page++;
         array1 = mainActivity.update();
         if (array1!=null) {
             count +=20;
@@ -143,7 +135,6 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 newArray[i][3] = array[i][3];
                 newArray[i][4] = array[i][4];
             }
-            Log.d("artman", "array1 ------ >>>>>>       " + array1[1][1]);
             for (int i = 0; i < 20; i++) {
                 newArray[(count - 20) + i][0] = array1[i][0];
                 newArray[(count - 20) + i][1] = array1[i][1];
@@ -153,7 +144,6 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             }
             array = newArray;
         }
-
     }
     @Override
     public int getItemCount() {
