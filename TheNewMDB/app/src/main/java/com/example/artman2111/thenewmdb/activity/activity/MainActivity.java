@@ -3,19 +3,27 @@ package com.example.artman2111.thenewmdb.activity.activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.ActionBar;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.example.artman2111.thenewmdb.R;
 import com.example.artman2111.thenewmdb.activity.adapter.Adapter_movie;
+import com.example.artman2111.thenewmdb.activity.models.Film_Wrapper;
 import com.example.artman2111.thenewmdb.activity.tmdb.FilmModalAccept;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -26,35 +34,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Context context = this;
     private FilmModalAccept filmModalAccept;
     private LinearLayout linearLayout;
-    private String[][] array;
-    private String[][] array1;
+    private List<Film_Wrapper> film_wrappers;
     private Thread thread;
+    private ProgressBar progressBar;
     public static int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics(), new Crashlytics());
+        film_wrappers = new ArrayList<>();
         setContentView(R.layout.activity_main);
         linearLayout = (LinearLayout) findViewById(R.id.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.mainActivityForMovie);
-        GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        final GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new Adapter_movie(context, array);
-        ActionBar actionBar = getSupportActionBar();
+        adapter = new Adapter_movie(context, film_wrappers);
         setTitle("Popular Film");
+        if (isNetworkAvailable()){
+            startThread();
+        }else {
+            Toast toast = Toast.makeText(context,"No internet connection ",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
+        }
         recyclerView.setAdapter(adapter);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onStart() {
         super.onStart();
-        array1= Adapter_movie.newArray;
         recyclerView.scrollToPosition(position);
-        if (array1==null) {
-            startThread();
-        }
-        if (array1!=null){
-            adapter = new Adapter_movie(context, array1);
+        if (film_wrappers.size()>1){
+            adapter = new Adapter_movie(context, film_wrappers);
             recyclerView.setAdapter(adapter);
         }
         reloadAdapter();
@@ -67,25 +79,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public String[][] update(){
+    public void update(final List<Film_Wrapper> film_wrappers2, final int size) {
+        this.film_wrappers = film_wrappers2;
         thread = new Thread(new Runnable() {
-            private String[][] arraylist;
             @Override
             public void run() {
-                filmModalAccept = new FilmModalAccept(MainActivity.this);
-                arraylist = filmModalAccept.getPathsFromAPI(sortbypop);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        array = arraylist;
-                    }
+                FilmModalAccept filmModalAccept = new FilmModalAccept(film_wrappers, size);
+                film_wrappers = filmModalAccept.getPathsFromAPI(sortbypop);
 
-                });
             }
         });
-        thread.start();
-        return array;
 
+        FilmModalAccept.page++;
+        thread.start();
     }
     private void reloadAdapter() {
         Handler handler = new Handler();
@@ -95,24 +101,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 adapter.notifyDataSetChanged();
                 reloadAdapter();
             }
-        },1500);
+        },1000);
 
 
     }
     public void startThread(){
         thread = new Thread(new Runnable() {
-            private String[][] arraylist;
 
             @Override
             public void run() {
                 filmModalAccept = new FilmModalAccept(MainActivity.this);
-                arraylist = filmModalAccept.getPathsFromAPI(sortbypop);
+                film_wrappers = filmModalAccept.getPathsFromAPI(sortbypop);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        array = arraylist;
-                        Context context = MainActivity.this;
-                        adapter = new Adapter_movie(context, array);
+                        adapter = new Adapter_movie(MainActivity.this, film_wrappers);
                         recyclerView.setAdapter(adapter);
 
                     }

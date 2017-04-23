@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
@@ -25,15 +24,16 @@ import com.squareup.picasso.Target;
 
 public class FilmActivity extends AppCompatActivity implements View.OnClickListener {
     private int position;
-    private String poster;
     private ScrollView scrollView;
     private TextView titel , about, data;
     private ImageButton imageButton;
-    private String id;
+    private Intent intent;
     private String title;
+    private String id;
     private String overview;
     private String release;
-    private Intent intent;
+    private String poster;
+
     public FilmActivity(){
     }
 
@@ -51,17 +51,17 @@ public class FilmActivity extends AppCompatActivity implements View.OnClickListe
         if (intent!=null){
             Bundle bundle = intent.getExtras();
             if (bundle!=null){
-                id = bundle.getString("id");
                 position = bundle.getInt("position");
                 poster = bundle.getString("poster");
+                id = bundle.getString("id");
+                release = bundle.getString("release");
                 title = bundle.getString("title");
                 overview = bundle.getString("overview");
-                release = bundle.getString("release");
+
             }
         }
         setTitle(title);
         setBackgraund();
-        Log.d("artman","looock id ---->>>>>    "+id);
         titel.setText(title);
         about.setText(overview);
         data.setText(release);

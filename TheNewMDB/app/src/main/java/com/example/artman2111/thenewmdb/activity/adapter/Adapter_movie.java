@@ -3,7 +3,6 @@ package com.example.artman2111.thenewmdb.activity.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,7 +15,10 @@ import android.widget.Toast;
 import com.example.artman2111.thenewmdb.R;
 import com.example.artman2111.thenewmdb.activity.activity.FilmActivity;
 import com.example.artman2111.thenewmdb.activity.activity.MainActivity;
+import com.example.artman2111.thenewmdb.activity.models.Film_Wrapper;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 /**
  * Created by artman2111 on 13.03.17.
@@ -24,12 +26,8 @@ import com.squareup.picasso.Picasso;
 
 public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
-    private int count;
-    private String[][] array;
-    public String[][] array1;
     private Context context;
-    public static String[][] newArray;
-    private String imageMovie = "imageMovie";
+    private List<Film_Wrapper> film_wrappers;
     private MainActivity mainActivity = new MainActivity();
 
 
@@ -37,17 +35,11 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
 
-    public Adapter_movie(Context context , String[][] paths ) {
+    public Adapter_movie(Context context , List<Film_Wrapper> paths ) {
         inflater = LayoutInflater.from(context);
-        array = paths;
-        if (array != null) {
-            count = array.length;
-        }
+        this.film_wrappers = paths;
         this.context = context;
     }
-
-
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.item_popular_film, parent, false);
@@ -69,14 +61,12 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final int position1 = holder.getAdapterPosition();
         item(holder, position1);
-        Handler handler = new Handler();
         ((ItemView) holder).imageButtonFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position1 = holder.getAdapterPosition();
                 Toast toast = Toast.makeText(context,"Hello i am new Toast in favorite button in position -> "+ position1,Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.BOTTOM,0,0);
                 toast.show();
@@ -85,69 +75,40 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         ((ItemView) holder).imageViewImageFilm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position1 = holder.getAdapterPosition();
                 onClickListener(position1);
             }
         });
-        if (position1-1 == count - 2) {
+        if (position == film_wrappers.size()-1) {
             upDate();
         }
-
     }
     public  void favoritButtonClick(int position){
         //TODO this is favorite button for my DATA BASE
     }
     public void onClickListener(int position){
-        String id = array[position][0];
-        String poster = array[position][1];
-        String title = array[position][3];
-        String overview = array[position][2];
-        String release = array[position][4];
         Intent intent = new Intent(context, FilmActivity.class);
-        intent.putExtra("id",id);
         intent.putExtra("position",position);
-        intent.putExtra("poster",poster);
-        intent.putExtra("title",title);
-        intent.putExtra("overview",overview);
-        intent.putExtra("release",release);
+        intent.putExtra("poster",film_wrappers.get(position).getPoster());
+        intent.putExtra("id",film_wrappers.get(position).getId());
+        intent.putExtra("title",film_wrappers.get(position).getTitle());
+        intent.putExtra("overview",film_wrappers.get(position).getOverview());
+        intent.putExtra("release",film_wrappers.get(position).getRelease());
         context.startActivity(intent);
     }
     public void item(final RecyclerView.ViewHolder holder,int position){
         Drawable d;
-        int itemID = position;
-        if (array!=null) {
             d = (context.getResources().getDrawable(R.drawable.images));
             String result = "https://image.tmdb.org/t/p/w500";
-            String poster = array[position][1];
+            String poster = film_wrappers.get(position).getPoster();
             Picasso.with(context).load(result+poster).resize(513,769).placeholder(d).into(((ItemView) holder).imageViewImageFilm);
-        }
     }
 
-    public void upDate(){
-        array1 = mainActivity.update();
-        if (array1!=null) {
-            count +=20;
-            newArray = new String[count][count];
-            for (int i = 0; i < count - 20; i++) {
-                newArray[i][0] = array[i][0];
-                newArray[i][1] = array[i][1];
-                newArray[i][2] = array[i][2];
-                newArray[i][3] = array[i][3];
-                newArray[i][4] = array[i][4];
-            }
-            for (int i = 0; i < 20; i++) {
-                newArray[(count - 20) + i][0] = array1[i][0];
-                newArray[(count - 20) + i][1] = array1[i][1];
-                newArray[(count - 20) + i][2] = array1[i][2];
-                newArray[(count - 20) + i][3] = array1[i][3];
-                newArray[(count - 20) + i][4] = array1[i][4];
-            }
-            array = newArray;
-        }
+    public void upDate() {
+        mainActivity.update(film_wrappers,film_wrappers.size());
     }
     @Override
     public int getItemCount() {
-        return count;
+        return film_wrappers.size();
 
     }
 

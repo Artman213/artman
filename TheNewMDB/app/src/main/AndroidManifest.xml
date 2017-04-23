@@ -12,7 +12,7 @@
         android:icon="@drawable/tmdb"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/January">
+        android:theme="@style/TheMDB">
         <activity android:name=".activity.activity.MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
