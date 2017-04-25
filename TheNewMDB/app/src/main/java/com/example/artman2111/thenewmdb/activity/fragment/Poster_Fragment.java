@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import com.example.artman2111.thenewmdb.R;
 import com.example.artman2111.thenewmdb.activity.activity.FilmPosterActivity;
 import com.example.artman2111.thenewmdb.activity.adapter.Adapter_Gallery;
-import com.example.artman2111.thenewmdb.activity.models.Gallery_Acept;
+import com.example.artman2111.thenewmdb.activity.models.Gallery_Accept;
 import com.example.artman2111.thenewmdb.activity.tmdb.FilmModalAccept;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class Poster_Fragment extends Fragment {
     private LinearLayout linearLayout;
     private RecyclerView recyclerView;
     private Adapter_Gallery adapter_gallery;
-    private List<Gallery_Acept> galleries = new ArrayList<>();
+    private List<Gallery_Accept> galleries = new ArrayList<>();
     private FilmModalAccept filmModalAcceptl;
     private String movieID;
     private String jsonArray;
@@ -43,6 +43,7 @@ public class Poster_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_poster, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar3);
+        jsonArray =  "posters";
         return view;
     }
 
@@ -55,7 +56,6 @@ public class Poster_Fragment extends Fragment {
     public void Start(){
         linearLayout = (LinearLayout) view.findViewById(R.id.linearLayoutfragmrntPoster);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragmentPoster);
-        jsonArray =  "posters";
         movieID = FilmPosterActivity.id;
         filmModalAcceptl = new FilmModalAccept(getActivity());
         if (movieID!=null){

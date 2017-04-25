@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.artman2111.thenewmdb.R;
 import com.example.artman2111.thenewmdb.activity.activity.FilmActivity;
 import com.example.artman2111.thenewmdb.activity.activity.MainActivity;
-import com.example.artman2111.thenewmdb.activity.models.Film_Wrapper;
+import com.example.artman2111.thenewmdb.activity.models.Film_Accept;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.List;
 public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
     private Context context;
-    private List<Film_Wrapper> film_wrappers;
+    private List<Film_Accept> film_accepts;
     private MainActivity mainActivity = new MainActivity();
 
 
@@ -35,9 +35,9 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
 
-    public Adapter_movie(Context context , List<Film_Wrapper> paths ) {
+    public Adapter_movie(Context context , List<Film_Accept> paths ) {
         inflater = LayoutInflater.from(context);
-        this.film_wrappers = paths;
+        this.film_accepts = paths;
         this.context = context;
     }
     @Override
@@ -78,7 +78,7 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 onClickListener(position1);
             }
         });
-        if (position == film_wrappers.size()-1) {
+        if (position == film_accepts.size()-1) {
             upDate();
         }
     }
@@ -88,27 +88,27 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onClickListener(int position){
         Intent intent = new Intent(context, FilmActivity.class);
         intent.putExtra("position",position);
-        intent.putExtra("poster",film_wrappers.get(position).getPoster());
-        intent.putExtra("id",film_wrappers.get(position).getId());
-        intent.putExtra("title",film_wrappers.get(position).getTitle());
-        intent.putExtra("overview",film_wrappers.get(position).getOverview());
-        intent.putExtra("release",film_wrappers.get(position).getRelease());
+        intent.putExtra("poster", film_accepts.get(position).getPoster());
+        intent.putExtra("id", film_accepts.get(position).getId());
+        intent.putExtra("title", film_accepts.get(position).getTitle());
+        intent.putExtra("overview", film_accepts.get(position).getOverview());
+        intent.putExtra("release", film_accepts.get(position).getRelease());
         context.startActivity(intent);
     }
     public void item(final RecyclerView.ViewHolder holder,int position){
         Drawable d;
             d = (context.getResources().getDrawable(R.drawable.images));
             String result = "https://image.tmdb.org/t/p/w500";
-            String poster = film_wrappers.get(position).getPoster();
+            String poster = film_accepts.get(position).getPoster();
             Picasso.with(context).load(result+poster).resize(513,769).placeholder(d).into(((ItemView) holder).imageViewImageFilm);
     }
 
     public void upDate() {
-        mainActivity.update(film_wrappers,film_wrappers.size());
+        mainActivity.update(film_accepts);
     }
     @Override
     public int getItemCount() {
-        return film_wrappers.size();
+        return film_accepts.size();
 
     }
 

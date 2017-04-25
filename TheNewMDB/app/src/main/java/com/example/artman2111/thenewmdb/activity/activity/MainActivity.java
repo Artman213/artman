@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 import com.example.artman2111.thenewmdb.R;
 import com.example.artman2111.thenewmdb.activity.adapter.Adapter_movie;
-import com.example.artman2111.thenewmdb.activity.models.Film_Wrapper;
+import com.example.artman2111.thenewmdb.activity.models.Film_Accept;
 import com.example.artman2111.thenewmdb.activity.tmdb.FilmModalAccept;
 
 import java.util.ArrayList;
@@ -29,19 +29,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static boolean sortbypop = true;
     private Context context = this;
     private FilmModalAccept filmModalAccept;
-    private List<Film_Wrapper> film_wrappers;
+    private List<Film_Accept> film_accepts;
     private Thread thread;
     public static int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics(), new Crashlytics());
-        film_wrappers = new ArrayList<>();
+        film_accepts = new ArrayList<>();
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.mainActivityForMovie);
         final GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new Adapter_movie(context, film_wrappers);
+        adapter = new Adapter_movie(context, film_accepts);
         setTitle("Popular Film");
         if (isNetworkAvailable()){
             startThread();
@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
         recyclerView.scrollToPosition(position);
-        if (film_wrappers.size()>1){
-            adapter = new Adapter_movie(context, film_wrappers);
+        if (film_accepts.size()>1){
+            adapter = new Adapter_movie(context, film_accepts);
             recyclerView.setAdapter(adapter);
         }
         reloadAdapter();
@@ -71,18 +71,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void update(final List<Film_Wrapper> film_wrappers2, final int size) {
-        this.film_wrappers = film_wrappers2;
+    public void update(final List<Film_Accept> film_wrappers2) {
+        FilmModalAccept.page++;
+        this.film_accepts = film_wrappers2;
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                FilmModalAccept filmModalAccept = new FilmModalAccept(film_wrappers, size);
-                film_wrappers = filmModalAccept.getPathsFromAPI(sortbypop);
+                FilmModalAccept filmModalAccept = new FilmModalAccept(film_accepts);
+                film_accepts = filmModalAccept.getPathsFromAPI(sortbypop);
 
             }
         });
-
-        FilmModalAccept.page++;
         thread.start();
     }
     private void reloadAdapter() {
@@ -103,11 +102,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void run() {
                 filmModalAccept = new FilmModalAccept(MainActivity.this);
-                film_wrappers = filmModalAccept.getPathsFromAPI(sortbypop);
+                film_accepts = filmModalAccept.getPathsFromAPI(sortbypop);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        adapter = new Adapter_movie(MainActivity.this, film_wrappers);
+                        adapter = new Adapter_movie(MainActivity.this, film_accepts);
                         recyclerView.setAdapter(adapter);
 
                     }

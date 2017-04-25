@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import com.example.artman2111.thenewmdb.R;
 import com.example.artman2111.thenewmdb.activity.activity.FilmPosterActivity;
 import com.example.artman2111.thenewmdb.activity.adapter.Adapter_Gallery;
-import com.example.artman2111.thenewmdb.activity.models.Gallery_Acept;
+import com.example.artman2111.thenewmdb.activity.models.Gallery_Accept;
 import com.example.artman2111.thenewmdb.activity.tmdb.FilmModalAccept;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class Backdrops_Fragment extends Fragment {
     private View view;
     private RecyclerView recyclerView;
     private Adapter_Gallery adapter_gallery;
-    private List<Gallery_Acept> galleries = new ArrayList<>();
+    private List<Gallery_Accept> galleries = new ArrayList<>();
     private FilmModalAccept filmModalAcceptl;
     private String movieID;
     private String jsonArray;

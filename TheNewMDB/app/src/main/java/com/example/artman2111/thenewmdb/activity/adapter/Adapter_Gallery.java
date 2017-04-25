@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.artman2111.thenewmdb.R;
-import com.example.artman2111.thenewmdb.activity.models.Gallery_Acept;
+import com.example.artman2111.thenewmdb.activity.models.Gallery_Accept;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -25,10 +25,10 @@ public class Adapter_Gallery extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private LayoutInflater inflater;
     private Context context;
-    private List<Gallery_Acept> galleries;
+    private List<Gallery_Accept> galleries;
 
 
-    public Adapter_Gallery(Context context,List<Gallery_Acept> galleries){
+    public Adapter_Gallery(Context context,List<Gallery_Accept> galleries){
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.galleries = galleries;
@@ -60,7 +60,7 @@ public class Adapter_Gallery extends RecyclerView.Adapter<RecyclerView.ViewHolde
         String result = "https://image.tmdb.org/t/p/w500";
         Drawable d;
         d = (context.getResources().getDrawable(R.drawable.images));
-        Picasso.with(context).load(result+galleries.get(position).getImage()).resize(513,769).placeholder(d).into(((ItemView) holder).imageViewImageFilm);
+        Picasso.with(context).load(result+galleries.get(position).getPoster()).resize(513,769).placeholder(d).into(((ItemView) holder).imageViewImageFilm);
 
 
     }
