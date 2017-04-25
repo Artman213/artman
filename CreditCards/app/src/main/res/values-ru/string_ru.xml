@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Кредитные карты</string>
+    <string name="action_settings">Settings</string>
+    <string name="name">Имя</string>
+    <string name="_Surname">Фамилия</string>
+    <string name="card_1">Card-1</string>
+    <string name="card_2">Card-2/PIN</string>
+    <string name="ok">Ok</string>
+    <string name="delete">Удалить</string>
+    <string name="copy">Копировать</string>
+    <string name="name_sname">Имя Фамилия</string>
+    <string name="card1">card1</string>
+    <string name="search">Поиск</string>
+    <string name="update">Обновит</string>
+</resources>

@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.example.artman2111.thenewmdb.R;
@@ -26,7 +25,6 @@ import java.util.List;
 
 public class Backdrops_Fragment extends Fragment {
     private View view;
-    private LinearLayout linearLayout;
     private RecyclerView recyclerView;
     private Adapter_Gallery adapter_gallery;
     private List<Gallery_Acept> galleries = new ArrayList<>();
@@ -39,6 +37,9 @@ public class Backdrops_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_backdrops, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar2);
+        filmModalAcceptl = new FilmModalAccept(getActivity());
+        movieID = FilmPosterActivity.id;
+        jsonArray =  "backdrops";
         return view;
     }
 
@@ -47,14 +48,10 @@ public class Backdrops_Fragment extends Fragment {
         super.onStart();
         progressBar.setVisibility(View.VISIBLE);
         Start();
-
     }
     public void Start(){
-        linearLayout = (LinearLayout) view.findViewById(R.id.linearLayoutfragmrntBackdrops);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragmentBackdrops);
-        jsonArray =  "backdrops";
-        movieID = FilmPosterActivity.id;
-        filmModalAcceptl = new FilmModalAccept(getActivity());
+
         if (movieID!=null){
             galleries = filmModalAcceptl.getGalleryFromAPI(movieID,jsonArray);
         }

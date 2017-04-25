@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Credit Cards</string>
+    <string name="action_settings">Settings</string>
+    <string name="name">Name</string>
+    <string name="_Surname">Surname</string>
+    <string name="card_1">Card-1</string>
+    <string name="card_2">Card-2/PIN</string>
+    <string name="ok">Ok</string>
+    <string name="delete">Delete</string>
+    <string name="copy">Copy</string>
+    <string name="name_sname">Name Sname</string>
+    <string name="card1">card1</string>
+    <string name="search">Search</string>
+    <string name="update">Update</string>
+</resources>

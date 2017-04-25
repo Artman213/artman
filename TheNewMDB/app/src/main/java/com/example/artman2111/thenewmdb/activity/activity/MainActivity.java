@@ -3,17 +3,13 @@ package com.example.artman2111.thenewmdb.activity.activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -33,10 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static boolean sortbypop = true;
     private Context context = this;
     private FilmModalAccept filmModalAccept;
-    private LinearLayout linearLayout;
     private List<Film_Wrapper> film_wrappers;
     private Thread thread;
-    private ProgressBar progressBar;
     public static int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Fabric.with(this, new Crashlytics(), new Crashlytics());
         film_wrappers = new ArrayList<>();
         setContentView(R.layout.activity_main);
-        linearLayout = (LinearLayout) findViewById(R.id.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.mainActivityForMovie);
         final GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
@@ -60,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setAdapter(adapter);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onStart() {
         super.onStart();

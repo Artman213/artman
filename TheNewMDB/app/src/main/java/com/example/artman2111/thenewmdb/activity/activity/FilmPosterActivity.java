@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.artman2111.thenewmdb.R;
@@ -19,7 +18,6 @@ import com.example.artman2111.thenewmdb.activity.fragment.Poster_Fragment;
 
 public class FilmPosterActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView backdrops,poster;
-    private LinearLayout linearLayout;
     private Backdrops_Fragment backdrops_fragment;
     private Poster_Fragment poster_fragment;
     public static String id;
@@ -29,7 +27,6 @@ public class FilmPosterActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         getSupportActionBar().setElevation(0);
         setContentView(R.layout.activity_poster_film);
-        linearLayout = (LinearLayout) findViewById(R.id.layoutFilmPosterActivity);
         findViewById(R.id.backdrops).setOnClickListener(this);
         findViewById(R.id.posters).setOnClickListener(this);
 

@@ -108,15 +108,11 @@ public class FilmModalAccept extends BaseModal {
     public List<Film_Wrapper> getPathsFromJSON(String JSONStringParam) throws JSONException {
         JSONObject jsonString = new JSONObject(JSONStringParam);
         JSONArray moviesArr = jsonString.getJSONArray("results");
-        Log.d("artman","dbFilm in film modal arrsize ->>>  " + arrsize);
         for (int i = 0; i < moviesArr.length(); i++) {
             JSONObject movie = moviesArr.getJSONObject(i);
             Film_Wrapper film_wrapper = new Film_Wrapper(movie.getString("poster_path"),movie.getString("id"),movie.getString("title"),movie.getString("overview"),movie.getString("release_date"));
             dbFilm.add(arrsize,film_wrapper);
-            arrsize++;
         }
-        int test =+ arrsize;
-            Log.d("artman","dbFilm in film modal arrsize ->>>  " + test);
         return dbFilm;
 
     }
