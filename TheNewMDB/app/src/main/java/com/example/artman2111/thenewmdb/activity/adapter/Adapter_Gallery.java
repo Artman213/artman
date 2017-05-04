@@ -1,6 +1,7 @@
 package com.example.artman2111.thenewmdb.activity.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.artman2111.thenewmdb.R;
+import com.example.artman2111.thenewmdb.activity.activity.ImageActivity;
 import com.example.artman2111.thenewmdb.activity.models.Gallery_Accept;
 import com.squareup.picasso.Picasso;
 
@@ -55,14 +57,26 @@ public class Adapter_Gallery extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Log.d("artman","galleries size -> " +galleries.size());
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         String result = "https://image.tmdb.org/t/p/w500";
         Drawable d;
         d = (context.getResources().getDrawable(R.drawable.images));
-        Picasso.with(context).load(result+galleries.get(position).getPoster()).resize(513,769).placeholder(d).into(((ItemView) holder).imageViewImageFilm);
+        Picasso.with(context).load(result+galleries.get(position).getPoster()).resize(513,769)
+                .placeholder(d).into(((ItemView) holder).imageViewImageFilm);
+        ((ItemView) holder).imageViewImageFilm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OnClick(holder.getAdapterPosition());
+            }
+        });
 
 
+
+    }
+    public void OnClick(int id){
+        Intent intent = new Intent(context, ImageActivity.class);
+        intent.putExtra("image",galleries.get(id).getPoster());
+        context.startActivity(intent);
     }
 
     @Override

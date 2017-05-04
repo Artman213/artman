@@ -114,7 +114,7 @@ public class FilmModalAccept extends BaseModal {
 
     }
     public List<Gallery_Accept> getGalleryFromAPI(String movieID, final String jsonArray) {
-        String urlString = "https://api.themoviedb.org/3/movie/" + movieID + "/images?api_key=" + getApiKey();
+        String urlString = getGalдeryUrl(movieID);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, urlString,
 

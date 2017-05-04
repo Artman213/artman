@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.example.artman2111.thenewmdb.R;
@@ -28,7 +27,6 @@ import java.util.List;
 public class Poster_Fragment extends Fragment {
 
     private View view;
-    private LinearLayout linearLayout;
     private RecyclerView recyclerView;
     private Adapter_Gallery adapter_gallery;
     private List<Gallery_Accept> galleries = new ArrayList<>();
@@ -54,7 +52,6 @@ public class Poster_Fragment extends Fragment {
         Start();
     }
     public void Start(){
-        linearLayout = (LinearLayout) view.findViewById(R.id.linearLayoutfragmrntPoster);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragmentPoster);
         movieID = FilmPosterActivity.id;
         filmModalAcceptl = new FilmModalAccept(getActivity());

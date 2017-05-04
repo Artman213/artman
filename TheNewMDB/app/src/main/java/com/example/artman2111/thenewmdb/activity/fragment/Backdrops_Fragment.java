@@ -37,8 +37,6 @@ public class Backdrops_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_backdrops, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar2);
-        filmModalAcceptl = new FilmModalAccept(getActivity());
-        movieID = FilmPosterActivity.id;
         jsonArray =  "backdrops";
         return view;
     }
@@ -51,7 +49,8 @@ public class Backdrops_Fragment extends Fragment {
     }
     public void Start(){
         recyclerView = (RecyclerView) view.findViewById(R.id.fragmentBackdrops);
-
+        movieID = FilmPosterActivity.id;
+        filmModalAcceptl = new FilmModalAccept(getActivity());
         if (movieID!=null){
             galleries = filmModalAcceptl.getGalleryFromAPI(movieID,jsonArray);
         }
