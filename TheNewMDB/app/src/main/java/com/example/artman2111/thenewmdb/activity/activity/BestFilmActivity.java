@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
 import com.example.artman2111.thenewmdb.R;
 import com.example.artman2111.thenewmdb.activity.adapter.AdapterMovie;
 import com.example.artman2111.thenewmdb.activity.models.FilmAccept;
@@ -30,9 +30,13 @@ import com.example.artman2111.thenewmdb.activity.tmdb.FilmModalAccept;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.fabric.sdk.android.Fabric;
+import static com.example.artman2111.thenewmdb.activity.tmdb.Constants.sortbypop;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+/**
+ * Created by artman2111 on 11.05.17.
+ */
+
+public class BestFilmActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private AdapterMovie adapter;
     private Context context = this;
@@ -43,21 +47,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private View m_NavigationDrawer = null;
     private  static  final int MENU_ITEM_SEARCH = 5101;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        Constants.sortbypop = true;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics(), new Crashlytics());
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_best);
+        sortbypop = false;
         film_accepts = new ArrayList<>();
         Toolbar m_toolbar;
         m_toolbar = (Toolbar) findViewById(R.id.toolbar);
-        m_toolbar.setTitle("Популярные фильмы");
+        m_toolbar.setTitle("Лучшие фильмы");
         m_DrawerLayout = (DrawerLayout) findViewById(R.id.DrawerLayoutMainActivity);
         m_NavigationDrawer = findViewById(R.id.NavigationDrawer);
         setSupportActionBar(m_toolbar);
-        Drawable menuIconDrawable = ContextCompat.getDrawable(this,R.drawable.ic_menu_black_24dp);
-        menuIconDrawable.setColorFilter(ContextCompat.getColor(this,
-                android.R.color.white),
+        Drawable menuIconDrawable = ContextCompat.getDrawable(this, R.drawable.ic_menu_black_24dp);
+        menuIconDrawable.setColorFilter(ContextCompat
+                .getColor(this, android.R.color.white),
                 PorterDuff.Mode.SRC_ATOP);
         m_toolbar.setNavigationIcon(menuIconDrawable);
         m_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -66,20 +69,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 m_DrawerLayout.openDrawer(m_NavigationDrawer);
             }
         });
-        recyclerView = (RecyclerView) findViewById(R.id.mainActivityForMovie);
-        final GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        recyclerView = (RecyclerView) findViewById(R.id.bestFilmActivity);
+        final GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new AdapterMovie(context, film_accepts);
-        if (isNetworkAvailable()){
+        if (isNetworkAvailable()) {
             startThread();
-        }else {
-            Toast toast = Toast.makeText(context,"No internet connection ",Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER,0,0);
+        } else {
+            Toast toast = Toast.makeText(context, "No internet connection ", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }
         recyclerView.setAdapter(adapter);
     }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -96,21 +98,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkinfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkinfo!=null && activeNetworkinfo.isConnected();
-    }
-
-
-    public void update(final List<FilmAccept> film_wrappers2) {
-        FilmModalAccept.page++;
-        this.film_accepts = film_wrappers2;
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                FilmModalAccept filmModalAccept = new FilmModalAccept(film_accepts);
-                film_accepts = filmModalAccept.getPathsFromAPI(Constants.sortbypop);
-
-            }
-        });
-        thread.start();
     }
     public void reloadAdapter() {
         Handler handler = new Handler();
@@ -129,12 +116,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void run() {
-                filmModalAccept = new FilmModalAccept(MainActivity.this);
+                filmModalAccept = new FilmModalAccept(BestFilmActivity.this);
                 film_accepts = filmModalAccept.getPathsFromAPI(Constants.sortbypop);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        adapter = new AdapterMovie(MainActivity.this, film_accepts);
+                        adapter = new AdapterMovie(BestFilmActivity.this, film_accepts);
                         recyclerView.setAdapter(adapter);
 
                     }
@@ -150,8 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MenuItem itemTime = menu.add(0, MENU_ITEM_SEARCH,0,"Search");
         Drawable drawableIconTimer = ContextCompat
                 .getDrawable(this, R.drawable.ic_search_black_24dp);
-        drawableIconTimer.setColorFilter(ContextCompat
-                .getColor(this, android.R.color.white),
+        drawableIconTimer.setColorFilter(ContextCompat.getColor(this, android.R.color.white),
                 PorterDuff.Mode.SRC_ATOP);
         itemTime.setIcon(drawableIconTimer);
         itemTime.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -169,9 +155,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }
-

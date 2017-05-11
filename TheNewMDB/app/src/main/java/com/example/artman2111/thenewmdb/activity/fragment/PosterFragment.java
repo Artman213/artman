@@ -3,6 +3,7 @@ package com.example.artman2111.thenewmdb.activity.fragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,8 +13,8 @@ import android.widget.ProgressBar;
 
 import com.example.artman2111.thenewmdb.R;
 import com.example.artman2111.thenewmdb.activity.activity.FilmPosterActivity;
-import com.example.artman2111.thenewmdb.activity.adapter.Adapter_Gallery;
-import com.example.artman2111.thenewmdb.activity.models.Gallery_Accept;
+import com.example.artman2111.thenewmdb.activity.adapter.AdapterGallery;
+import com.example.artman2111.thenewmdb.activity.models.GalleryAccept;
 import com.example.artman2111.thenewmdb.activity.tmdb.FilmModalAccept;
 
 import java.util.ArrayList;
@@ -23,21 +24,25 @@ import java.util.List;
  * Created by artman2111 on 14.04.17.
  */
 
-public class Backdrops_Fragment extends Fragment {
+public class PosterFragment extends Fragment {
+
     private View view;
     private RecyclerView recyclerView;
-    private Adapter_Gallery adapter_gallery;
-    private List<Gallery_Accept> galleries = new ArrayList<>();
+    private AdapterGallery adapter_gallery;
+    private List<GalleryAccept> galleries = new ArrayList<>();
     private FilmModalAccept filmModalAcceptl;
     private String movieID;
     private String jsonArray;
     private ProgressBar progressBar;
 
+
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_backdrops, container, false);
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar2);
-        jsonArray =  "backdrops";
+    public View onCreateView(LayoutInflater inflater, ViewGroup container
+            , Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_poster, container, false);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar3);
+        jsonArray =  "posters";
         return view;
     }
 
@@ -48,7 +53,7 @@ public class Backdrops_Fragment extends Fragment {
         Start();
     }
     public void Start(){
-        recyclerView = (RecyclerView) view.findViewById(R.id.fragmentBackdrops);
+        recyclerView = (RecyclerView) view.findViewById(R.id.fragmentPoster);
         movieID = FilmPosterActivity.id;
         filmModalAcceptl = new FilmModalAccept(getActivity());
         if (movieID!=null){
@@ -60,10 +65,9 @@ public class Backdrops_Fragment extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                adapter_gallery = new Adapter_Gallery(getActivity(),galleries);
-                recyclerView.setAdapter(adapter_gallery);
+                adapter_gallery = new AdapterGallery(getActivity(),galleries);
                 progressBar.setVisibility(View.GONE);
-
+                recyclerView.setAdapter(adapter_gallery);
             }
         },1000);
     }

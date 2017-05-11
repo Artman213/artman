@@ -4,14 +4,14 @@ package com.example.artman2111.thenewmdb.activity.models;
  * Created by artman2111 on 19.04.17.
  */
 
-public class Film_Accept extends Base_Accept {
+public class FilmAccept extends BaseAccept {
     private String id;
     private String title;
     private String overview;
     private String release;
 
 
-    public Film_Accept(String poster ,String id, String title, String overview, String release) {
+    public FilmAccept(String poster , String id, String title, String overview, String release) {
         setPoster(poster);
         this.id = id;
         this.title = title;

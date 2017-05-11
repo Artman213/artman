@@ -6,5 +6,7 @@
     <color name="actionbar_background">#64b927</color>
     <color name="actionbar_text_color">#ffffff</color>
     <color name="colorBlackImage">#000000</color>
+    <color name="color_focused">#de787474</color>
+    <color name="color_pressed">#dea9a8a8</color>
 </resources>
 

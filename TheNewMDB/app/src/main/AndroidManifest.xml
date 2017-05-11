@@ -25,6 +25,7 @@
         <activity android:name=".activity.activity.FavoriteActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.activity.SearchActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.activity.ImageActivity"/>
+        <activity android:name=".activity.activity.BestFilmActivity" android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="io.fabric.ApiKey"

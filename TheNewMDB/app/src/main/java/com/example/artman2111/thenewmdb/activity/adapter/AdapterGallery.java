@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.ImageView;
 
 import com.example.artman2111.thenewmdb.R;
 import com.example.artman2111.thenewmdb.activity.activity.ImageActivity;
-import com.example.artman2111.thenewmdb.activity.models.Gallery_Accept;
+import com.example.artman2111.thenewmdb.activity.models.GalleryAccept;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -21,28 +20,26 @@ import java.util.List;
  * Created by artman2111 on 14.04.17.
  */
 
-public class Adapter_Gallery extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterGallery extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
 
     private LayoutInflater inflater;
     private Context context;
-    private List<Gallery_Accept> galleries;
+    private List<GalleryAccept> galleries;
 
 
-    public Adapter_Gallery(Context context,List<Gallery_Accept> galleries){
+    public AdapterGallery(Context context, List<GalleryAccept> galleries){
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.galleries = galleries;
-        Log.d("artman","galleries size -> " +galleries.size());
-
     }
 
 
-    public class ItemView extends RecyclerView.ViewHolder{
+    private class ItemView extends RecyclerView.ViewHolder{
         View rootView;
         ImageView imageViewImageFilm;
-        public ItemView(View itemView) {
+        private ItemView(View itemView) {
             super(itemView);
             rootView = itemView;
             imageViewImageFilm = (ImageView) itemView.findViewById(R.id.itemPopularImage);
@@ -61,7 +58,7 @@ public class Adapter_Gallery extends RecyclerView.Adapter<RecyclerView.ViewHolde
         String result = "https://image.tmdb.org/t/p/w500";
         Drawable d;
         d = (context.getResources().getDrawable(R.drawable.images));
-        Picasso.with(context).load(result+galleries.get(position).getPoster()).resize(513,769)
+        Picasso.with(context).load(result+galleries.get(position).getPoster())
                 .placeholder(d).into(((ItemView) holder).imageViewImageFilm);
         ((ItemView) holder).imageViewImageFilm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +70,7 @@ public class Adapter_Gallery extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
     }
-    public void OnClick(int id){
+    private void OnClick(int id){
         Intent intent = new Intent(context, ImageActivity.class);
         intent.putExtra("image",galleries.get(id).getPoster());
         context.startActivity(intent);

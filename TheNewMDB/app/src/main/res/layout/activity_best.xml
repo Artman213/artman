@@ -7,16 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
-    tools:context="com.example.artman2111.thenewmdb.activity.activity.MainActivity">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <android.support.v7.widget.Toolbar
         android:elevation="4dp"
         android:id="@+id/toolbar"
@@ -26,18 +18,8 @@
         app:titleTextColor="#fffefe"/>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:id="@+id/mainActivityForMovie"/>
-
-    <ProgressBar
-        style="?android:attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_marginTop="-40dp"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:visibility="gone"/>
-
+        android:id="@+id/bestFilmActivity"/>
 
 </LinearLayout>
     <fragment

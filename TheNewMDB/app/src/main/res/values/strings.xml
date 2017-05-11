@@ -3,4 +3,8 @@
     <string name="Overvive">Overview</string>
     <string name="backdrops">BACKDROPS</string>
     <string name="posters">POSTERS</string>
+    <string name="popFilm">Популярные фильмы</string>
+    <string name="bestFilm">Лучшие фильмы</string>
+    <string name="favoriteFilm">Избранные</string>
+    <string name="SearchEditText">Поиск</string>
 </resources>

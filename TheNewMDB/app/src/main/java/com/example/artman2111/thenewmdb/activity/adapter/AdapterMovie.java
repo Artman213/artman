@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.artman2111.thenewmdb.R;
 import com.example.artman2111.thenewmdb.activity.activity.FilmActivity;
 import com.example.artman2111.thenewmdb.activity.activity.MainActivity;
-import com.example.artman2111.thenewmdb.activity.models.Film_Accept;
+import com.example.artman2111.thenewmdb.activity.models.FilmAccept;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -24,10 +24,10 @@ import java.util.List;
  * Created by artman2111 on 13.03.17.
  */
 
-public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterMovie extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
     private Context context;
-    private List<Film_Accept> film_accepts;
+    private List<FilmAccept> film_accepts;
     private MainActivity mainActivity = new MainActivity();
 
 
@@ -35,7 +35,7 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
 
-    public Adapter_movie(Context context , List<Film_Accept> paths ) {
+    public AdapterMovie(Context context , List<FilmAccept> paths ) {
         inflater = LayoutInflater.from(context);
         this.film_accepts = paths;
         this.context = context;
@@ -48,11 +48,11 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
-    public class ItemView extends RecyclerView.ViewHolder{
+    private class ItemView extends RecyclerView.ViewHolder{
         View rootView;
         ImageView imageViewImageFilm;
         ImageButton imageButtonFavorite;
-        public ItemView(View itemView) {
+        private ItemView(View itemView) {
             super(itemView);
             rootView = itemView;
             imageViewImageFilm = (ImageView) itemView.findViewById(R.id.itemPopularImage);
@@ -67,7 +67,9 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         ((ItemView) holder).imageButtonFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(context,"Hello i am new Toast in favorite button in position -> "+ position1,Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(context,
+                        "Hello i am new Toast in favorite button in position -> "+ position1,
+                        Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.BOTTOM,0,0);
                 toast.show();
             }
@@ -85,7 +87,7 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public  void favoritButtonClick(int position){
         //TODO this is favorite button for my DATA BASE
     }
-    public void onClickListener(int position){
+    private void onClickListener(int position){
         Intent intent = new Intent(context, FilmActivity.class);
         intent.putExtra("position",position);
         intent.putExtra("poster", film_accepts.get(position).getPoster());
@@ -95,15 +97,16 @@ public class Adapter_movie extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         intent.putExtra("release", film_accepts.get(position).getRelease());
         context.startActivity(intent);
     }
-    public void item(final RecyclerView.ViewHolder holder,int position){
+    private void item(final RecyclerView.ViewHolder holder,int position){
         Drawable d;
             d = (context.getResources().getDrawable(R.drawable.images));
             String result = "https://image.tmdb.org/t/p/w500";
             String poster = film_accepts.get(position).getPoster();
-            Picasso.with(context).load(result+poster).resize(513,769).placeholder(d).into(((ItemView) holder).imageViewImageFilm);
+            Picasso.with(context).load(result+poster).resize(513,769)
+                    .placeholder(d).into(((ItemView) holder).imageViewImageFilm);
     }
 
-    public void upDate() {
+    private void upDate() {
         mainActivity.update(film_accepts);
     }
     @Override

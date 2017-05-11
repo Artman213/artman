@@ -14,6 +14,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.artman2111.thenewmdb.R;
+import com.example.artman2111.thenewmdb.activity.tmdb.Constants;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -61,14 +62,14 @@ public class FilmActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         setTitle(title);
-        setBackgraund();
+        setBackground();
         titel.setText(title);
         about.setText(overview);
         data.setText(release);
-        setBackgraund();
+        setBackground();
 
     }
-    public void setBackgraund() {
+    public void setBackground() {
         Drawable d = (this.getResources().getDrawable(R.drawable.images));
         String result = "https://image.tmdb.org/t/p/w780";
         Picasso.with(this).load(result + poster).placeholder(d).into(new Target() {
@@ -91,7 +92,7 @@ public class FilmActivity extends AppCompatActivity implements View.OnClickListe
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                setBackgraund();
+                setBackground();
             }
         },2000);
     }
@@ -100,7 +101,7 @@ public class FilmActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        MainActivity.position = position;
+        Constants.position = position;
     }
 
     @Override

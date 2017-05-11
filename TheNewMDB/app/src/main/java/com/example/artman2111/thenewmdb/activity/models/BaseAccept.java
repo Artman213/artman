@@ -4,7 +4,7 @@ package com.example.artman2111.thenewmdb.activity.models;
  * Created by artman2111 on 15.03.17.
  */
 
-public abstract class Base_Accept {
+public abstract class BaseAccept {
     private String poster = null;
 
     public String getPoster(){
