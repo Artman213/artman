@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         film_accepts = new ArrayList<>();
         Toolbar m_toolbar;
         m_toolbar = (Toolbar) findViewById(R.id.toolbar);
-        m_toolbar.setTitle("Популярные фильмы");
+        m_toolbar.setTitle(R.string.popFilm);
         m_DrawerLayout = (DrawerLayout) findViewById(R.id.DrawerLayoutMainActivity);
         m_NavigationDrawer = findViewById(R.id.NavigationDrawer);
         setSupportActionBar(m_toolbar);
@@ -69,11 +69,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView = (RecyclerView) findViewById(R.id.mainActivityForMovie);
         final GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new AdapterMovie(context, film_accepts);
+        adapter = new AdapterMovie(context, film_accepts,true);
         if (isNetworkAvailable()){
             startThread();
         }else {
-            Toast toast = Toast.makeText(context,"No internet connection ",Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(context,R.string.InternetError,Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
         }
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
         recyclerView.scrollToPosition(Constants.position);
         if (film_accepts.size()>1){
-            adapter = new AdapterMovie(context, film_accepts);
+            adapter = new AdapterMovie(context, film_accepts,true);
             recyclerView.setAdapter(adapter);
         }
         reloadAdapter();
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        adapter = new AdapterMovie(MainActivity.this, film_accepts);
+                        adapter = new AdapterMovie(MainActivity.this, film_accepts,true);
                         recyclerView.setAdapter(adapter);
 
                     }
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuItem itemTime = menu.add(0, MENU_ITEM_SEARCH,0,"Search");
+        MenuItem itemTime = menu.add(0, MENU_ITEM_SEARCH,0,R.string.SearchEditText);
         Drawable drawableIconTimer = ContextCompat
                 .getDrawable(this, R.drawable.ic_search_black_24dp);
         drawableIconTimer.setColorFilter(ContextCompat

@@ -1,13 +1,24 @@
 package com.example.artman2111.thenewmdb.activity.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by artman2111 on 19.04.17.
  */
 
 public class FilmAccept extends BaseAccept {
+    @SerializedName("id")
+    @Expose
     private String id;
+    @SerializedName("title")
+    @Expose
     private String title;
+    @SerializedName("overview")
+    @Expose
     private String overview;
+    @SerializedName("release")
+    @Expose
     private String release;
 
 
@@ -18,6 +29,7 @@ public class FilmAccept extends BaseAccept {
         this.overview = overview;
         this.release = release;
     }
+
 
 
     public String getId() {

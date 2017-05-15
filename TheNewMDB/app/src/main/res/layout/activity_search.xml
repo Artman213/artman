@@ -31,7 +31,10 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/SearchEditText"
                 android:id="@+id/searchEditText"
-                android:layout_weight="4"/>
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:layout_weight="4"
+                android:inputType="text"/>
         </android.support.design.widget.TextInputLayout>
         <ImageButton
             android:layout_width="wrap_content"
@@ -44,11 +47,12 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/color_background">
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:id="@+id/searchActivityRecyclerView"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
 </LinearLayout>

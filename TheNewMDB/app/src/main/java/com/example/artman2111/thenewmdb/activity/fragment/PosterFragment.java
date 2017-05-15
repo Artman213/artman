@@ -69,6 +69,6 @@ public class PosterFragment extends Fragment {
                 progressBar.setVisibility(View.GONE);
                 recyclerView.setAdapter(adapter_gallery);
             }
-        },1000);
+        },800);
     }
 }

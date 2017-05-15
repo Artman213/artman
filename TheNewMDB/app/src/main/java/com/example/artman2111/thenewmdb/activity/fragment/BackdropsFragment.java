@@ -41,8 +41,6 @@ public class BackdropsFragment extends Fragment {
         jsonArray =  "backdrops";
         return view;
     }
-    public void reloadAdabterbySort(){
-    }
 
     @Override
     public void onStart() {

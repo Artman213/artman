@@ -59,6 +59,7 @@ public class AdapterGallery extends RecyclerView.Adapter<RecyclerView.ViewHolder
         Drawable d;
         d = (context.getResources().getDrawable(R.drawable.images));
         Picasso.with(context).load(result+galleries.get(position).getPoster())
+                .resize(513,769)
                 .placeholder(d).into(((ItemView) holder).imageViewImageFilm);
         ((ItemView) holder).imageViewImageFilm.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -7,6 +7,6 @@
     <color name="actionbar_text_color">#ffffff</color>
     <color name="colorBlackImage">#000000</color>
     <color name="color_focused">#de787474</color>
-    <color name="color_pressed">#dea9a8a8</color>
+    <color name="color_background">#e2e2e2</color>
 </resources>
 

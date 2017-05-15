@@ -51,7 +51,6 @@ public class FilmModalAccept extends BaseModal {
         try {
             String urlString = null;
             if (sortbypop) {
-                Log.d("artman","page - >  " + page);
                 urlString = getPopUrl()+page;
 
             } else {

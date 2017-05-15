@@ -29,16 +29,13 @@ public class AdapterMovie extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private Context context;
     private List<FilmAccept> film_accepts;
     private MainActivity mainActivity = new MainActivity();
+    private boolean search;
 
-
-
-
-
-
-    public AdapterMovie(Context context , List<FilmAccept> paths ) {
+    public AdapterMovie(Context context , List<FilmAccept> paths,boolean search ) {
         inflater = LayoutInflater.from(context);
         this.film_accepts = paths;
         this.context = context;
+        this.search = search;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -80,8 +77,10 @@ public class AdapterMovie extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 onClickListener(position1);
             }
         });
-        if (position == film_accepts.size()-1) {
-            upDate();
+        if (search) {
+            if (position == film_accepts.size() - 1) {
+                upDate();
+            }
         }
     }
     public  void favoritButtonClick(int position){
