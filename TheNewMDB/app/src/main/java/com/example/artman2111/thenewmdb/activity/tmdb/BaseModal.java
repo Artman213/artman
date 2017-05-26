@@ -4,7 +4,7 @@ package com.example.artman2111.thenewmdb.activity.tmdb;
  * Created by artman2111 on 14.03.17.
  */
 
-public abstract class  BaseModal {
+public class  BaseModal {
 
     private final static String POP_URL
             = "https://api.themoviedb.org/3/movie/popular?api_key=94edada748dbcb0dbb6dded2fe0d5c82&language=ru&page=";

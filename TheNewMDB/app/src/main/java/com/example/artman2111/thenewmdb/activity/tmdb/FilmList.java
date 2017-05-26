@@ -1,5 +1,6 @@
-package com.example.artman2111.thenewmdb.activity.models;
+package com.example.artman2111.thenewmdb.activity.tmdb;
 
+import com.example.artman2111.thenewmdb.activity.models.FilmAccept;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

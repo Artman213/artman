@@ -95,6 +95,7 @@ public class AdapterMovie extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         intent.putExtra("overview", film_accepts.get(position).getOverview());
         intent.putExtra("release", film_accepts.get(position).getRelease());
         context.startActivity(intent);
+
     }
     private void item(final RecyclerView.ViewHolder holder,int position){
         Drawable d;

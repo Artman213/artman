@@ -43,7 +43,7 @@ public class FilmModalAccept extends BaseModal {
     public FilmModalAccept(List<FilmAccept> film_accepts) {
         dbFilm = film_accepts;
     }
-
+// HTTP URL CONNECTION Start
     public List<FilmAccept> getPathsFromAPI(boolean sortbypop) {
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
@@ -121,6 +121,8 @@ public class FilmModalAccept extends BaseModal {
         return dbFilm;
 
     }
+    //END
+    //VOLLEY START
     public List<GalleryAccept> getGalleryFromAPI(String movieID, final String jsonArray) {
         String urlString = getGalдeryUrl(movieID);
 
@@ -155,6 +157,9 @@ public class FilmModalAccept extends BaseModal {
 
         return dbGallery;
     }
+    //VOLLEY END
+
+    //RETROFIT START
     private static Retrofit getRetrofit(){
         return new Retrofit.Builder()
                 .baseUrl(getUrlBase())
@@ -164,5 +169,5 @@ public class FilmModalAccept extends BaseModal {
     public  static ApiService getApiService(){
         return getRetrofit().create(ApiService.class);
     }
-
+    //RETROFIT END
 }

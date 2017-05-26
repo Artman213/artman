@@ -24,7 +24,7 @@ import android.widget.Toast;
 import com.example.artman2111.thenewmdb.R;
 import com.example.artman2111.thenewmdb.activity.adapter.AdapterMovie;
 import com.example.artman2111.thenewmdb.activity.models.FilmAccept;
-import com.example.artman2111.thenewmdb.activity.models.FilmList;
+import com.example.artman2111.thenewmdb.activity.tmdb.FilmList;
 import com.example.artman2111.thenewmdb.activity.tmdb.ApiService;
 import com.example.artman2111.thenewmdb.activity.tmdb.Constants;
 import com.example.artman2111.thenewmdb.activity.tmdb.FilmModalAccept;

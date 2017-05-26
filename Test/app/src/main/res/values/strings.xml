@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Test</string>
+    <string name="login">login</string>
+    <string name="password">password</string>
+    <string name="registration">registration</string>
+    <string name="user_name">User Name: </string>
+    <string name="last_login">Last Login: </string>
+    <string name="in_data_base">In Data base</string>
+</resources>

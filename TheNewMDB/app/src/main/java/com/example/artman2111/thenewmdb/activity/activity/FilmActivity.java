@@ -102,6 +102,7 @@ public class FilmActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         super.onBackPressed();
         Constants.position = position;
+        overridePendingTransition(R.anim.pull_in_down,R.anim.pull_in_up);
     }
 
     @Override
