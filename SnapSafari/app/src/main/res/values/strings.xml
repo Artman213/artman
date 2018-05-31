@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">MediaAr</string>
+    <string name="activity_login_welcome">Welcome to Snap Safari</string>
+    <string name="activity_login_twitter_login">Login with Twitter</string>
+    <string name="activity_login_facebook_login">Login with Facebook</string>
+    <string name="activity_login_gmail_login">Login with Gmail</string>
+    <string name="activity_login_email_login">Login with E-Mail</string>
+    <string name="activity_login_try_it">Let me try Snap Safari</string>
+    <string name="activity_elephant_label">Earth Elephant</string>
+    <string name="activity_snap_button">Continue</string>
+    <string name="activity_snap_name">Earth Elephant</string>
+    <string name="activity_snap_level">Level 2</string>
+    <string name="activity_snap_description">Ut imperdiet volutpat aliquam. Ut semper dolor elit, sed mattis mi semper vitae. Curabitur id elit lectus. Phasellus maximus justo dictum porritor.</string>
+    <string name="activity_elephant_disabled_label">Oh Snap! Can\'t get this one</string>
+    <string name="activity_snap_cards_title">My Card Collection</string>
+    <string name="activity_snap_cards_snapped_animals">Battle Cards</string>
+    <string name="activity_snap_cards_boost_cards">Boost Cards</string>
+    <string name="activity_snap_cards_description">%1$d/%2$d</string>
+    <string name="activity_main_menu_play_button">Play</string>
+    <string name="activity_main_menu_snap_card_button">My Cards</string>
+    <string name="activity_main_menu_settings_button">Settings</string>
+    <string name="activity_snap_redeem_now">Redeem</string>
+    <string name="activity_promo_details_promo_card">Promo card</string>
+    <string name="activity_promo_details_redeem_now">Redeem now!</string>
+    <string name="activity_promo_details_promo_code_suffix">PROMO CODE: %s</string>
+    <string name="fragment_boost_cards_text">Blank for now</string>
+    <string name="activity_snap_cards_promo_cards">Promo Cards</string>
+    <string name="activity_welcome_register">Register</string>
+    <string name="activity_welcome_login">Login</string>
+    <string name="activity_main_menu_battle">Battle</string>
+    <string name="activity_main_menu_marketplace">Marketplace</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="tab_log_in">LOGIN</string>
+    <string name="tab_register">REGISTER</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="let_s_start">Let\'s start</string>
+    <string name="let_me_try">Let me try</string>
+    <string name="mediar">Medi AR</string>
+    <string name="activity_main_menu_settings">Settings</string>
+    <string name="user_name">Username</string>
+
+    <string name="distance_model">%.1f</string>
+    <string name="model_meters">%s meters</string>
+    <string name="animals_nearby">Animals nearby</string>
+    <string name="icon">Icon</string>
+</resources>

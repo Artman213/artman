@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="136dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginEnd="16dp">
+    <ImageButton
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="?attr/selectableItemBackground"
+        android:layout_gravity="center_vertical|left|top"
+        android:src="@drawable/menu_back"
+        android:id="@+id/menu_back"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="14dp"
+        android:layout_gravity="right|top"
+        android:id="@+id/menu_map"
+        android:visibility="gone"
+        android:src="@drawable/ic_map"/>
+
+    <TextView
+        android:id="@+id/menu_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <ImageButton
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="?attr/selectableItemBackground"
+        android:src="@drawable/ic_dark_menu"
+        android:layout_marginBottom="36dp"
+        android:layout_alignParentEnd="true"
+        android:scaleType="fitCenter"
+        android:layout_gravity="center_vertical|right|bottom"
+        android:id="@+id/menu_hamburger"
+        android:layout_alignParentRight="true" />
+</RelativeLayout>

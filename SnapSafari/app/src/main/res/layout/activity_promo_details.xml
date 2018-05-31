@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="ua.in.zeusapps.mediar.activities.PromoDetailsActivity">
+
+    <ua.in.zeusapps.mediar.controls.MenuDark
+        android:id="@+id/activity_promo_details_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/promo_background"
+        android:orientation="vertical">
+
+
+        <ua.in.zeusapps.mediar.controls.LockableViewPager
+            android:id="@+id/activity_promo_details_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:layout_gravity="top"
+            android:layout_marginBottom="24dp">
+
+        </ua.in.zeusapps.mediar.controls.LockableViewPager>
+
+        <!--<FrameLayout
+            android:id="@+id/pagesContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="8dp">
+
+        </FrameLayout>-->
+        <LinearLayout
+            android:id="@+id/pagesContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

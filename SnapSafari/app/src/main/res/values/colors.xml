@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0e7991</color>
+    <color name="colorPrimaryDark">#0d5d6f</color>
+    <color name="colorAccent">#541712</color>
+    <color name="colorBlack">#d000</color>
+
+    <color name="colorTwitter">#79ccf0</color>
+    <color name="colorFacebook">#547bbd</color>
+    <color name="colorGmail">#f0be1717</color>
+    <color name="colorSnap">#359127</color>
+    <color name="colorRedeem">#df6c17</color>
+
+    <color name="colorLabel">#541712</color>
+    <color name="colorGray">#a59190</color>
+    <color name="colorLightBlue">#6b8891</color>
+    <color name="colorMenuDark">#fdcd2b</color>
+    <color name="colorSnapCards">#f4e6cb</color>
+    <color name="colorMenu">#fdca2a</color>
+    <color name="colorMenuInfoBackground">#3c1e09</color>
+    <color name="colorProfileImgBorder">#09917a</color>
+    <color name="colorPromoBackground">#fdfdfe</color>
+    <color name="colorPromoTerm">#a32155</color>
+    <color name="colorPromoCode">#0072bb</color>
+    <color name="colorFilterBackground">#b48a39</color>
+    <color name="colorFilterSelected">#fdcd2b</color>
+    <color name="colorLoginBackground">#531915</color>
+    <color name="colorNewBackground">#0e7991</color>
+    <color name="colorLoginForeground">#f017bde2</color>
+    <color name="colorHint">#eee</color>
+    <color name="colorTabText">#093947</color>
+    <color name="colorLoginButton">#f0be1717</color>
+    <color name="colorDarkBlue">#f003141a</color>
+    <color name="colorBlue">#ff093947</color>
+    <color name="colorTabIndicator">#134f8c</color>
+    <color name="colorTabIndicatorDefault">#b8cadc</color>
+    <color name="colorBottomTabGrey">#c9c9c8</color>
+    <color name="colorTextLightBlue">#0072bc</color>
+    <color name="colorTextLightGrey">#bfbab7</color>
+    <color name="colorBorder">#093947</color>
+
+</resources>
